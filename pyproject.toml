@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "lexicogenero"
-version = "0.1.0"
-description = ""
+version = "0.4.0"
+description = "Léxico e gênero literário em Grego Antigo"
 authors = ["Caio Geraldes <caio.geraldes@usp.br>"]
+license = 'MIT'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
