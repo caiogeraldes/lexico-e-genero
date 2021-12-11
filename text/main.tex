@@ -1,0 +1,105 @@
+% TEX program = xelatex
+% TEX encoding = UTF-8
+
+\documentclass[article, 12pt]{memoir}
+
+\OnehalfSpacing%
+
+\usepackage{silence}
+\WarningsOff[biblatex]
+
+\usepackage[no-math]{fontspec}
+\usepackage[main=brazil]{babel}
+
+\setmainfont{Gentium Plus}
+\setmonofont[Scale=0.75]{Noto Mono}
+
+\usepackage{indentfirst}
+\usepackage{linguex}
+\usepackage{tikz} %for all basic options
+\usepackage{tikz-qtree} %for simple tree syntax
+\usepgflibrary{arrows} %for arrow endings
+\usetikzlibrary{positioning,shapes.multipart} %for structured nodes
+\usetikzlibrary{tikzmark}
+\usepackage{tikz-qtree}
+\usepackage{tree-dvips}
+\usepackage{xargs}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[normalem]{ulem}
+
+% Pacotes de diagramação
+\usepackage{paralist}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyphenat}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\author{Caio Borges Aguida Geraldes}
+\title{Distribuição de verbos \emph{DcI} e \emph{GcI} em Grego Antigo: dialeto e gênero literário}
+\date{\today}
+
+\usepackage[backend=biber,
+            style=abnt,
+            pretty,
+            repeatfields,
+            noslsn,
+            % natbib,
+            extrayear,
+            ]{biblatex}
+\addbibresource{biblio.bib}
+
+\usepackage{lipsum}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  \lipsum[1]
+\end{abstract}
+
+\chapter{Introdução}
+
+Em trabalho anterior~\cite{Geraldes2020,Geraldes2021}, mostrei que a concordância de caso entre objeto indireto da matriz e predicado secundário de uma oração infinitiva (exemplificadas em~\ref{gloss:attrac}), estavam correlacionadas pelos seguintes fatores:
+\begin{inparaenum}[(a)]
+  \item distância entre controlador e alvo, quanto menor mais frequente;
+  \item classe de verbo infinitivo, sobretudo ocorrendo com cópulas;
+  \item classe do verbo matriz, sobretudo ocorrendo com verbos com sentido modal\slash{}deôntico;
+  \item autor, sendo mais frequente em Platão do que em Xenofonte e praticamente inexistente em Heródoto.
+\end{inparaenum}
+
+
+\ex.\label{gloss:attrac}\ag.\label{elthonta}symbọːléw-ẹː \uwave{tɔ̂ːj Ksenopʰɔ̂ːnti} \uline{eltʰóntɑ} {ẹːs delpʰọːs} ɑnɑkojnoɔ̂ːsɑj {tɔ̂ːj tʰeɔ̂ːj} {peri tɛ̂ːs porẹ́ːɑs}\\
+aconselha-\textsc{3sg} X.\textsc{dat.sg.m} indo-\textsc{acc.sg.m} para-Delfos interrogar.\textsc{inf} o-deus.\textsc{dat.sg} sobre-a-viagem\\
+Ele aconselha Xenofonte ir a Delfos interrogar o deus sobre a viagem. (Xen. Anab. 3.1.5) \textbf{[Sem atração]}
+\bg.\label{elthonti}ɑpʰɛ̂ːk-e \uwave{moj} \uline{eltʰónt-i} {pros hymɑ̂s} légẹːn tɑlɛːtʰɛ̂ː\\
+permitiu-\textsc{3sg} \textsc{pron{(1sg.dat.sg)}} indo-\textsc{dat.sg.m} frente-a-vós dizer.\textsc{inf} a-verdade-\textsc{acc.pl.n}\\
+Ele me permitiu ir frente a vós [e\slash{}para] dizer a verdade.  (Xen. Hell. 6.1.13) \textbf{[Com atração]}\footnote{Os exemplos utilizados foram retirados das edições disponibilizadas no TLG~\cite{tlg}. A transliteração foi realizada automaticamente utilizando o pacote \texttt{cltk}~\cite{johnson2014}, seguindo a reconstrução fonológica apresentada em~\textcite{Probert2010}.}
+
+
+Defendi que, pelo menos do ponto de vista de uma teoria linguística, seria possível explicar que a correlação entre atração de caso e autoria não indicava necessariamente que a atração estaria condicionada por diferenças dialetais, posto que era esperado que a presença de verbos principais com valor modal de ``ser possível ou necessário a alguém fazer algo'' era presumivelmente maior em diálogos filosóficos (Platão) do que em narrativas históricas (Heródoto).
+Essa pressuposição não é, no entanto, corroborada por nenhum estudo e a sua negativa é naturalmente possível: ``a distribuição de verbos modalizantes e não-modalizantes em grego antigo não depende do gênero literário.''
+
+Se a hipótese positiva estiver correta, um classificador possível para gênero literário será a frequência relativa de verbos modalizantes entre os verbos com construção obliquo com infinitivo.
+
+\chapter{Metodologia}
+Plataforma: \textcite{stanza}
+
+Modelo: \textcite{AGLDT2011,AGLDT2014}
+
+\chapter{Análises}
+
+\begin{itemize}
+  \item oi.
+  \item
+\end{itemize}
+
+\chapter{Conclusões}
+
+\printbibliography%
+
+\end{document}
