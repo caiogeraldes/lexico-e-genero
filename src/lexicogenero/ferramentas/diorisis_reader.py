@@ -33,10 +33,11 @@ def carrega_texto(nome_arquivo: str,
 
 def carrega_autor(autor: str,
                   diorisis_path: str,
+                  ignore: List[str] = [],
                   verbose: bool = True) -> Dict[str, List[Any]]:
     """ docstring for carrega_autor """
     textos_autor = [x for x in os.listdir(diorisis_path)
-                    if x.startswith(autor)]
+                    if (x.startswith(autor) and x not in ignore)]
     corpus_autor: Dict[str, List[Any]] = dict()
 
     for texto in textos_autor:
@@ -45,13 +46,17 @@ def carrega_autor(autor: str,
     return corpus_autor
 
 
-def carrega_autores(autores: List[str],
+def carrega_textos(autores: List[str],
                     diorisis_path: str,
+                    ignore: List[str] = [],
                     verbose: bool = True) -> Dict[str, List[Any]]:
+    """
+    docstring for carrega_textos
+    """
     corpus: Dict[str, List[Any]] = dict()
 
     for autor in autores:
-        corpus.update(carrega_autor(autor, diorisis_path, verbose))
+        corpus.update(carrega_autor(autor, diorisis_path, ignore, verbose))
 
     return corpus
 
@@ -119,7 +124,7 @@ def em_pandas(corpus: Dict[str, List[Any]],
 
         d_df = pd.DataFrame(data)
         d_df[['author', 'text']] = d_df['file'].str.split('-',
-                                                          0,
+                                                          n=1,
                                                           expand=True)
         d_df['text'] = d_df['text'].str.replace(r'\([0-9]*\).json', '',
                                                 regex=True).str.strip()
