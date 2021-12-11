@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 from typing import List, Dict, Any, Union
 from betacode.conv import beta_to_uni as bu
+from cltk.alphabet.grc import normalize_grc as ng
 
 
 def carrega_texto(nome_arquivo: str,
@@ -47,9 +48,9 @@ def carrega_autor(autor: str,
 
 
 def carrega_textos(autores: List[str],
-                    diorisis_path: str,
-                    ignore: List[str] = [],
-                    verbose: bool = True) -> Dict[str, List[Any]]:
+                   diorisis_path: str,
+                   ignore: List[str] = [],
+                   verbose: bool = True) -> Dict[str, List[Any]]:
     """
     docstring for carrega_textos
     """
@@ -67,7 +68,7 @@ def em_plain_text(corpus: Dict[str, List[Any]], nome_arquivo: str) -> str:
 
     for sent in sents:
         for token in sent['tokens']:
-            plain_text += bu(token['form']) + " "
+            plain_text += ng(bu(token['form'])) + " "
         plain_text += "\n"
     return plain_text
 
@@ -101,9 +102,9 @@ def em_pandas(corpus: Dict[str, List[Any]],
                 t_data['sent_id'] = int(sent_id)
                 t_data['location'] = sent_location
                 if t['type'] == 'word':
-                    t_data['form'] = bu(t['form'])
+                    t_data['form'] = ng(bu(t['form']))
                     if 'entry' in t['lemma'].keys():
-                        t_data['lemma'] = bu(t['lemma']['entry'])
+                        t_data['lemma'] = ng(bu(t['lemma']['entry']))
                     else:
                         t_data['lemma'] = np.nan
                     if 'POS' in t['lemma'].keys():
@@ -113,8 +114,8 @@ def em_pandas(corpus: Dict[str, List[Any]],
                     t_data['analyses'] = ";".join(t['lemma']['analyses'])
                     t_data['id'] = int(t['id'])
                 elif t['type'] == 'punct':
-                    t_data['form'] = bu(t['form'])
-                    t_data['lemma'] = bu(t['form'])
+                    t_data['form'] = ng(bu(t['form']))
+                    t_data['lemma'] = ng(bu(t['form']))
                     t_data['POS'] = 'punct'
                     t_data['analyses'] = 'punct'
                     t_data['id'] = 0
