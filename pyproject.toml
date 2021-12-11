@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "trabalholingcomp"
+name = "lexicogenero"
 version = "0.1.0"
 description = ""
 authors = ["Caio Geraldes <caio.geraldes@usp.br>"]
