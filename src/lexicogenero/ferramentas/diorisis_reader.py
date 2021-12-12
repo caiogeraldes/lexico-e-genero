@@ -18,8 +18,6 @@ def carrega_texto(nome_arquivo: str,
                   diorisis_path: str,
                   verbose: bool = True) -> Dict[str, List[Any]]:
     """docstring for carrega"""
-    if diorisis_path[-1] != "/":
-        diorisis_path = diorisis_path + "/"
 
     arquivo_path = diorisis_path + nome_arquivo
 
@@ -60,17 +58,6 @@ def carrega_textos(autores: List[str],
         corpus.update(carrega_autor(autor, diorisis_path, ignore, verbose))
 
     return corpus
-
-
-def em_plain_text(corpus: Dict[str, List[Any]], nome_arquivo: str) -> str:
-    sents = corpus[nome_arquivo]
-    plain_text: str = ""
-
-    for sent in sents:
-        for token in sent['tokens']:
-            plain_text += ng(bu(token['form'])) + " "
-        plain_text += "\n"
-    return plain_text
 
 
 def em_pandas(corpus: Dict[str, List[Any]],

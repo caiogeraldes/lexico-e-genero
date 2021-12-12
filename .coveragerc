@@ -1,0 +1,4 @@
+[run]
+omit =
+    src/lexicogenero/grc.py
+    src/lexicogenero/main.py
