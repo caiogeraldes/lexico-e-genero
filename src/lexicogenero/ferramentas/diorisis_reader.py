@@ -122,3 +122,45 @@ def em_pandas(corpus: Dict[str, List[Any]],
         df = pd.concat([df, d_df])
 
     return df
+
+
+def sent_pandas(corpus: Dict[str, List[Any]],
+                verbose: bool = False):
+
+    df = pd.DataFrame(columns=['sent_id',
+                               'location',
+                               'forms',
+                               'lemmata',
+                               'file'])
+    for nome_arquivo in corpus.keys():
+
+        if verbose:
+            print(f'Criando DF para: {nome_arquivo}')
+
+        sents = corpus[nome_arquivo]
+
+        data: List[Dict[str, Union[str, int, float]]] = list()
+
+        for sent in sents:
+            sent_dict = {}
+            sent_dict['sent_id'] = sent['id']
+            sent_dict['location'] = sent['location']
+            sent_dict['forms'] = ng(bu(" ".join([x['form'] for x in sent['tokens']])))
+            sent_dict['lemmata'] = ng(bu(" ".join([x['lemma'].get('entry', '0') for x in sent['tokens']
+                                                   if x['type'] != 'punct'])))
+
+            sent_dict['file'] = nome_arquivo
+            data.append(sent_dict)
+
+        d_df = pd.DataFrame(data)
+        d_df[['author', 'text']] = d_df['file'].str.split('-',
+                                                          n=1,
+                                                          expand=True)
+        d_df['text'] = d_df['text'].str.replace(r'\([0-9]*\).json', '',
+                                                regex=True).str.strip()
+        d_df['author'] = d_df['author'].str.replace(r'\([0-9]*\)',
+                                                    '',
+                                                    regex=True).str.strip()
+        df = pd.concat([df, d_df])
+
+    return df
