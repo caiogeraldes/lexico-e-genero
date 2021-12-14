@@ -142,15 +142,15 @@ def sent_pandas(corpus: Dict[str, List[Any]],
         data: List[Dict[str, Union[str, int, float]]] = list()
 
         for sent in sents:
-            sent_dict = {}
-            sent_dict['sent_id'] = sent['id']
-            sent_dict['location'] = sent['location']
-            sent_dict['forms'] = ng(bu(" ".join([x['form'] for x in sent['tokens']])))
-            sent_dict['lemmata'] = ng(bu(" ".join([x['lemma'].get('entry', '0') for x in sent['tokens']
+            s_dict = {}
+            s_dict['sent_id'] = sent['id']
+            s_dict['location'] = sent['location']
+            s_dict['forms'] = ng(bu(" ".join([x['form'] for x in sent['tokens']])))
+            s_dict['lemmata'] = ng(bu(" ".join([x['lemma'].get('entry', '0') for x in sent['tokens']
                                                    if x['type'] != 'punct'])))
 
-            sent_dict['file'] = nome_arquivo
-            data.append(sent_dict)
+            s_dict['file'] = nome_arquivo
+            data.append(s_dict)
 
         d_df = pd.DataFrame(data)
         d_df[['author', 'text']] = d_df['file'].str.split('-',
