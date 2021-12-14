@@ -146,8 +146,9 @@ def sent_pandas(corpus: Dict[str, List[Any]],
             s_dict['sent_id'] = sent['id']
             s_dict['location'] = sent['location']
             s_dict['forms'] = ng(bu(" ".join([x['form'] for x in sent['tokens']])))
-            s_dict['lemmata'] = ng(bu(" ".join([x['lemma'].get('entry', '0') for x in sent['tokens']
-                                                   if x['type'] != 'punct'])))
+            s_dict['lemmata'] = ng(bu(" ".join(
+                [x['lemma'].get('entry', '0') for x in sent['tokens']
+                 if x['type'] != 'punct'])))
 
             s_dict['file'] = nome_arquivo
             data.append(s_dict)
