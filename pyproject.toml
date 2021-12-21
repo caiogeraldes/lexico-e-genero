@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lexicogenero"
-version = "0.8.1"
+version = "0.9.0"
 description = "Léxico e gênero literário em Grego Antigo"
 authors = ["Caio Geraldes <caio.geraldes@usp.br>"]
 license = 'MIT'
