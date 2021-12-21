@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lexicogenero"
-version = "0.8.0"
+version = "0.8.1"
 description = "Léxico e gênero literário em Grego Antigo"
 authors = ["Caio Geraldes <caio.geraldes@usp.br>"]
 license = 'MIT'
@@ -28,6 +28,7 @@ pytest = "^6.2.5"
 pytest-cov = "^2.12.1"
 pandas-stubs = "^1.2.0"
 tox = "^3.24.4"
+jupyterlab = "^3.2.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
