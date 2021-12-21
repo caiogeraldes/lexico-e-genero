@@ -11,7 +11,6 @@ import pandas as pd
 import numpy as np
 from typing import List, Dict, Any, Union
 from betacode.conv import beta_to_uni as bu
-from cltk.alphabet.grc import normalize_grc as ng
 
 
 def carrega_texto(nome_arquivo: str,
@@ -89,9 +88,9 @@ def em_pandas(corpus: Dict[str, List[Any]],
                 t_data['sent_id'] = int(sent_id)
                 t_data['location'] = sent_location
                 if t['type'] == 'word':
-                    t_data['form'] = ng(bu(t['form']))
+                    t_data['form'] = bu(t['form'])
                     if 'entry' in t['lemma'].keys():
-                        t_data['lemma'] = ng(bu(t['lemma']['entry']))
+                        t_data['lemma'] = bu(t['lemma']['entry'])
                     else:
                         t_data['lemma'] = np.nan
                     if 'POS' in t['lemma'].keys():
@@ -101,8 +100,8 @@ def em_pandas(corpus: Dict[str, List[Any]],
                     t_data['analyses'] = ";".join(t['lemma']['analyses'])
                     t_data['id'] = int(t['id'])
                 elif t['type'] == 'punct':
-                    t_data['form'] = ng(bu(t['form']))
-                    t_data['lemma'] = ng(bu(t['form']))
+                    t_data['form'] = bu(t['form'])
+                    t_data['lemma'] = bu(t['form'])
                     t_data['POS'] = 'punct'
                     t_data['analyses'] = 'punct'
                     t_data['id'] = 0
@@ -145,10 +144,10 @@ def sent_pandas(corpus: Dict[str, List[Any]],
             s_dict = {}
             s_dict['sent_id'] = sent['id']
             s_dict['location'] = sent['location']
-            s_dict['forms'] = ng(bu(" ".join([x['form'] for x in sent['tokens']])))
-            s_dict['lemmata'] = ng(bu(" ".join(
+            s_dict['forms'] = bu(" ".join([x['form'] for x in sent['tokens']]))
+            s_dict['lemmata'] = bu(" ".join(
                 [x['lemma'].get('entry', '0') for x in sent['tokens']
-                 if x['type'] != 'punct'])))
+                 if x['type'] != 'punct']))
 
             s_dict['file'] = nome_arquivo
             data.append(s_dict)
