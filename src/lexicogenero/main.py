@@ -33,7 +33,6 @@ import logging
 
 logging.basicConfig(
     filename="data/log.log",
-    encoding="utf-8",
     level=logging.INFO,
     format="%(asctime)s %(message)s",
 )
@@ -437,7 +436,7 @@ if __name__ == "__main__":
     flp_hist = [
         {"genero": "hist", "lemma": lemma, "logprob": feature_log_prob_hist[lemma]}
         for lemma in sorted(
-            feature_log_prob_hist, key=feature_log_prob_hist.get, reverse=True
+            feature_log_prob_hist, key=feature_log_prob_hist.get, reverse=True # type: ignore
         )
         if lemma in verbos_dgci
     ]
@@ -456,7 +455,7 @@ if __name__ == "__main__":
     flp_filo = [
         {"genero": "filo", "lemma": lemma, "logprob": feature_log_prob_filo[lemma]}
         for lemma in sorted(
-            feature_log_prob_filo, key=feature_log_prob_filo.get, reverse=True
+            feature_log_prob_filo, key=feature_log_prob_filo.get, reverse=True # type: ignore
         )
         if lemma in verbos_dgci
     ]
@@ -487,7 +486,7 @@ if __name__ == "__main__":
         orient="horiz",
     )
     for i, (z, p) in enumerate(
-        zip(df_flp.sort_values("lemma").z, df_flp.sort_values("lemma").logprob)
+        zip(df_flp.sort_values("lemma").z, df_flp.sort_values("lemma").logprob) # type: ignore
     ):
         bar.text(0, (i / 2) - 0.1, str(round(z, 2)), fontdict={"fontsize": 15})
     plt.title("Probabilidade em log de cada lemma")

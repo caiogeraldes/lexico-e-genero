@@ -36,7 +36,7 @@ def lista_parágrafos(
     if json_file:
         with open(f"{perseus_path}/{arquivo}", "r") as file:
             doc = json.load(file)
-        texto_unicode = [
+        texto_unicode: List[str] = [
             bu(x["p"]["#text"]) for x in doc["TEI.2"]["text"]["body"]["div1"]
         ]
         texto_unicode = [x.replace("δῐ", "δι’") for x in texto_unicode]
@@ -45,14 +45,14 @@ def lista_parágrafos(
         with open(f"{perseus_path}/{arquivo}", "r") as file:
             soup: Any = BeautifulSoup(file.read(), "lxml")
 
-        texto_cru = soup.body.find("text").getText()
-        texto_unicode = bu(texto_cru)
+        texto_cru_str: str = soup.body.find("text").getText()
+        texto_unicode_str = bu(texto_cru_str)
 
-        texto_unicode = texto_unicode.replace(
+        texto_unicode_str = texto_unicode_str.replace(
             "δῐ", "δι’"
         )  # evita um erro irritante no cltk.
         texto_limpo = [
-            limpa(x, rm_punct) for x in texto_unicode.split("\n\n") if len(x) > 0
+            limpa(x, rm_punct) for x in texto_unicode_str.split("\n\n") if len(x) > 0
         ]
     return texto_limpo
 
